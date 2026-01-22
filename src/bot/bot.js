@@ -8,9 +8,10 @@ const bot = new Telegraf(env.botToken);
 bot.use(session());
 
 bot.start(AuthorizedUser, (ctx) => {
-    console.log(ctx.message);
     return ctx.reply("mensagem de boas vindas");
 });
+
+bot.on("");
 
 bot.on("forum_topic_created", async (ctx) => {
     const updateMessage = ctx?.update?.message;
@@ -19,7 +20,13 @@ bot.on("forum_topic_created", async (ctx) => {
     console.log({ topicId, topicTitle });
     const result = await categories.create(topicTitle, topicId);
     if (result) {
-        return ctx.reply(`topico criado - ${topicId} ${topicTitle}`);
+        return ctx
+            .reply(`topico criado - ${topicId} ${topicTitle}`)
+            .then(async (ctx) => {
+                const chatId = ctx.chat.id;
+                const messageId = ctx.message_id;
+                await bot.telegram.pinChatMessage(chatId, messageId);
+            });
     }
 });
 
@@ -36,6 +43,8 @@ bot.on("forum_topic_closed", async ({ update }) => {
 bot.command(/cadastro|cadastrar/gim, AuthorizedUser, async (ctx) => {
     replyOnGroup("mensagem", 3);
 });
+
+bot.hears(/nova mensalidade/gim, (ctx) => ctx.reply("mensalidade"));
 
 bot.launch();
 
