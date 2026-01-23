@@ -2,15 +2,15 @@ const { Telegraf, session, Scenes } = require("telegraf");
 const env = require("../config/env");
 const AuthorizedUser = require("../middleware/AuthorizedUser");
 const replyOnGroup = require("./handlers/replyOnGroup");
-const categories = require("../models/categories");
 const reminderWizard = require("./wizards/reminderWizard");
 const closeTopic = require("./handlers/closeTopic");
 const createTopic = require("./handlers/createTopic");
+const occasionalWizard = require("./wizards/occasionalWizard");
 
 const bot = new Telegraf(env.botToken);
 bot.use(session());
 
-const wizards = new Scenes.Stage([reminderWizard]);
+const wizards = new Scenes.Stage([reminderWizard, occasionalWizard]);
 
 bot.use(wizards.middleware());
 
@@ -30,7 +30,8 @@ bot.on("forum_topic_closed", async ({ update }) => {
 });
 
 bot.command(/cadastro|cadastrar/gim, AuthorizedUser, async (ctx) => {
-    replyOnGroup("mensagem", 3);
+    await ctx.scene.enter("occasional-wizard");
+    // replyOnGroup("mensagem", 3);
 });
 
 bot.hears(/lembrete/gim, async (ctx) => {
