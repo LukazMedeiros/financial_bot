@@ -1,10 +1,9 @@
 const { Telegraf, session, Scenes } = require("telegraf");
 const env = require("../config/env");
 const AuthorizedUser = require("../middleware/AuthorizedUser");
-const replyOnGroup = require("./handlers/replyOnGroup");
-const reminderWizard = require("./wizards/reminderWizard");
 const closeTopic = require("./handlers/closeTopic");
 const createTopic = require("./handlers/createTopic");
+const reminderWizard = require("./wizards/reminder/reminder.wizard");
 const occasionalWizard = require("./wizards/occasionalWizard");
 
 const bot = new Telegraf(env.botToken);
