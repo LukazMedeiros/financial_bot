@@ -1,11 +1,11 @@
 const dbConnection = require("../config/dbConnection");
 
 module.exports = {
-    create: async function (name, value) {
+    create: async function ({ topicTitle, topicId }) {
         try {
             const result = await dbConnection("categories").insert({
-                name,
-                value,
+                topicTitle,
+                topicId,
                 active: true,
             });
             return result > 0;
@@ -14,12 +14,16 @@ module.exports = {
         }
     },
 
-    delete: async function (name, value) {
+    delete: async function ({ topicTitle, topicId }) {
         try {
             const result = await dbConnection("categories")
                 .update({ active: false })
-                .where({ name, value });
+                .where({ topicTitle, topicId });
             return result > 0;
-        } catch (error) {}
+        } catch (error) {
+            console.log(error.message);
+
+            return false;
+        }
     },
 };

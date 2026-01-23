@@ -10,8 +10,8 @@ exports.up = function (knex) {
             .unique()
             .primary()
             .defaultTo(knex.fn.uuid());
-        table.string("name").notNullable();
-        table.integer("value").notNullable();
+        table.string("topicTitle").notNullable();
+        table.integer("topicId").notNullable();
         table.boolean("active").defaultTo(true);
     });
 };
