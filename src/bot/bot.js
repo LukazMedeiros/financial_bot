@@ -4,6 +4,8 @@ const AuthorizedUser = require("../middleware/AuthorizedUser");
 const replyOnGroup = require("./handlers/replyOnGroup");
 const categories = require("../models/categories");
 const reminderWizard = require("./wizards/reminderWizard");
+const closeTopic = require("./handlers/closeTopic");
+const createTopic = require("./handlers/createTopic");
 
 const bot = new Telegraf(env.botToken);
 bot.use(session());
@@ -18,29 +20,12 @@ bot.start(AuthorizedUser, (ctx) => {
 });
 
 bot.on("forum_topic_created", async (ctx) => {
-    const updateMessage = ctx?.update?.message;
-    const topicId = updateMessage?.message_thread_id;
-    const topicTitle = updateMessage?.forum_topic_created?.name;
-    console.log({ topicId, topicTitle });
-    const result = await categories.create({ topicTitle, topicId });
-    if (result) {
-        return ctx
-            .reply(`topico criado - ${topicId} ${topicTitle}`)
-            .then(async (ctx) => {
-                const chatId = ctx.chat.id;
-                const messageId = ctx.message_id;
-                await bot.telegram.pinChatMessage(chatId, messageId);
-            });
-    }
+    await createTopic(ctx, bot);
+    return;
 });
 
 bot.on("forum_topic_closed", async ({ update }) => {
-    const updateMessage = update?.message;
-    const topicId = updateMessage?.message_thread_id;
-    const topicTitle =
-        updateMessage?.reply_to_message?.forum_topic_created?.name;
-    console.log({ topicId, topicTitle });
-    await categories.delete({ topicTitle, topicId });
+    await closeTopic(update);
     return;
 });
 
