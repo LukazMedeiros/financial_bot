@@ -4,7 +4,7 @@ const AuthorizedUser = require("../middleware/AuthorizedUser");
 const closeTopic = require("./handlers/closeTopic");
 const createTopic = require("./handlers/createTopic");
 const reminderWizard = require("./wizards/reminder/reminder.wizard");
-const occasionalWizard = require("./wizards/occasionalWizard");
+const occasionalWizard = require("./wizards/occasional/occasionalWizard");
 
 const bot = new Telegraf(env.botToken);
 bot.use(session());
@@ -30,7 +30,6 @@ bot.on("forum_topic_closed", async ({ update }) => {
 
 bot.command(/cadastro|cadastrar/gim, AuthorizedUser, async (ctx) => {
     await ctx.scene.enter("occasional-wizard");
-    // replyOnGroup("mensagem", 3);
 });
 
 bot.hears(/lembrete/gim, async (ctx) => {

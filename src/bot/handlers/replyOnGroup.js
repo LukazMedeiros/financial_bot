@@ -7,5 +7,6 @@ module.exports = function replyOnGroup(message, topicId) {
     const chatId = env.chatId;
     agent.telegram.sendMessage(chatId, message, {
         message_thread_id: topicId,
+        parse_mode: "HTML",
     });
 };
