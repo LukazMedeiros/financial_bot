@@ -15,11 +15,11 @@ Qualquer coisa estou aqui para o que precisar. 😅`,
 Ocorreu um erro ao processar sua solicitação.
 Por favor, tente novamente em alguns instantes.😰`,
 
-    responsetoGroup: (state) => `Novo registro Adicionado 😉👍
+    responsetoGroup: (state) => `🚨 Novo registro 🚨
     
 📚 <i>Categoria</i>: <b>${state.topicTitle}</b>
 📰 <i>Descrição</i>: <b>${state.description}</b>
-💵 <i>Valor</i>: <b>${state.amount}</b>
+💵 <i>Valor</i>: R$ <b>${state.amount}</b>
 📅 <i>Data do Pagamento</i>: <b>${moment(state.payment_date).format("DD/MM/YYYY")}</b>`,
 };
 

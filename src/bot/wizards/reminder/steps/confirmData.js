@@ -1,4 +1,4 @@
-const isValidDay = require("../utils/isValidDay");
+const isValidDay = require("../../utils/isValidDay");
 
 const messages = {
     confirmation: (description, day) => `🔍 Só conferindo antes de salvar…
