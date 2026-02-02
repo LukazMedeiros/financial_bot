@@ -11,7 +11,7 @@ const messages = {
     validation: (state) => `Verifique se está tudo certo.
     <b>Categoria</b>: ${state.topicTitle}
     <b>Descrição</b>: ${state.description}
-    <b>Valor</b>: ${state.amount}
+    <b>Valor</b>: R$ ${state.amount}
     <b>Data do Pagamento</b>: ${moment(state.payment_date).format("DD/MM/YYYY")}`,
 };
 
