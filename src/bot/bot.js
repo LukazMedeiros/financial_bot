@@ -5,11 +5,16 @@ const closeTopic = require("./handlers/closeTopic");
 const createTopic = require("./handlers/createTopic");
 const reminderWizard = require("./wizards/reminder/reminder.wizard");
 const occasionalWizard = require("./wizards/occasional/occasionalWizard");
+const recurrentWizard = require("./wizards/recurrent/recurrentWizard");
 
 const bot = new Telegraf(env.botToken);
 bot.use(session());
 
-const wizards = new Scenes.Stage([reminderWizard, occasionalWizard]);
+const wizards = new Scenes.Stage([
+    reminderWizard,
+    occasionalWizard,
+    recurrentWizard,
+]);
 
 bot.use(wizards.middleware());
 
@@ -32,7 +37,11 @@ bot.command(/cadastro|cadastrar/gim, AuthorizedUser, async (ctx) => {
     await ctx.scene.enter("occasional-wizard");
 });
 
-bot.hears(/lembrete/gim, async (ctx) => {
+bot.command(/recurrent/gim, AuthorizedUser, async (ctx) => {
+    await ctx.scene.enter("recurrent-wizard");
+});
+
+bot.hears(/lembrete/gim, AuthorizedUser, async (ctx) => {
     await ctx.scene.enter("reminder-wizard");
 });
 
