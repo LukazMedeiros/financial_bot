@@ -1,3 +1,4 @@
+const expense = require("../../../../models/expense");
 const replyOnGroup = require("../../../handlers/replyOnGroup");
 const moment = require("moment");
 
@@ -29,12 +30,20 @@ async function finishWizard(ctx) {
         await ctx.editMessageReplyMarkup();
     }
     if (action === "YES") {
-        //adicionar registro em banco de dados
-        await ctx.replyWithHTML(messages.success);
-        await replyOnGroup(
-            messages.responsetoGroup(ctx.wizard.state),
-            ctx.wizard.state.topicId,
-        );
+        try {
+            const createdRecord = await expense.create(ctx.wizard.state);
+            if (createdRecord) {
+                await ctx.replyWithHTML(messages.success);
+                await replyOnGroup(
+                    messages.responsetoGroup(ctx.wizard.state),
+                    ctx.wizard.state.topicId,
+                );
+            } else {
+                await ctx.replyWithHTML(messages.error);
+            }
+        } catch (error) {
+            await ctx.replyWithHTML(messages.error);
+        }
     } else {
         await ctx.replyWithHTML(messages.cancel);
     }
