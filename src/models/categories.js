@@ -23,8 +23,6 @@ module.exports = {
                 .where({ topicTitle, topicId });
             return result > 0;
         } catch (error) {
-            console.log(error.message);
-
             return false;
         }
     },
@@ -36,7 +34,7 @@ module.exports = {
                 .where({ active: true });
             return result;
         } catch (error) {
-            console.log(error.message);
+            return false;
         }
     },
 
@@ -47,7 +45,7 @@ module.exports = {
                 .where({ topicId });
             return topicTitle;
         } catch (error) {
-            console.log(error.message);
+            return false;
         }
     },
 };

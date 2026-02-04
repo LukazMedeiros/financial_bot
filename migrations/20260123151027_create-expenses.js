@@ -12,9 +12,10 @@ exports.up = function (knex) {
             .defaultTo(knex.fn.uuid());
         table.string("description").notNullable();
         table.decimal("amount", 10, 2).notNullable();
-        table.date("payment_date").notNullable();
-        table.date("due_date");
+        table.dateTime("payment_date").notNullable();
+        table.dateTime("due_date");
         table.string("category");
+        table.string("type");
         table.boolean("due_date_exceeded");
         table.string("user").notNullable();
     });
