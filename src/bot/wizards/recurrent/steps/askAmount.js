@@ -6,6 +6,7 @@ const message = `Beleza. Qual é o <b>valor</b>?
 
 async function askAmount(ctx) {
     ctx.wizard.state.description = ctx.message?.text.trim();
+    ctx.wizard.state.user = ctx.message?.from?.username;
     await ctx.replyWithHTML(message);
     return ctx.wizard.next();
 }

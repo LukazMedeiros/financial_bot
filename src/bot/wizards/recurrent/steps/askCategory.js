@@ -5,7 +5,6 @@ Para começar, selecione a <b>categoria.</b>`;
 
 async function askCategory(ctx) {
     ctx.wizard.state.type = "recurrent";
-    ctx.wizard.state.user = ctx.message?.from?.username;
 
     const activeCategories = await categories.list();
 
