@@ -3,7 +3,7 @@ const bot = require("./bot/bot");
 const job = require("./schedule/job");
 
 (async (_) => {
-    await dbConnection.migrate.up();
+    await dbConnection.migrate.latest();
     bot;
     job;
 })();

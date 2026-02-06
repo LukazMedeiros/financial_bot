@@ -1,7 +1,6 @@
 const isValidDate = (date) => {
-    const currentDate = new Date();
     const dateObject = new Date(date);
-    if (isNaN(dateObject.getTime()) || dateObject > currentDate) {
+    if (isNaN(dateObject.getTime())) {
         return false;
     }
     return true;
