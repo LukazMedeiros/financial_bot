@@ -3,6 +3,7 @@ const env = require("../config/env");
 const AuthorizedUser = require("../middleware/AuthorizedUser");
 const closeTopic = require("./handlers/closeTopic");
 const createTopic = require("./handlers/createTopic");
+const createRegister = require("./handlers/createRegister");
 const reminderWizard = require("./wizards/reminder/reminder.wizard");
 const occasionalWizard = require("./wizards/occasional/occasionalWizard");
 const recurrentWizard = require("./wizards/recurrent/recurrentWizard");
@@ -33,12 +34,18 @@ bot.on("forum_topic_closed", async ({ update }) => {
     return;
 });
 
-bot.command(/cadastro|cadastrar/gim, AuthorizedUser, async (ctx) => {
-    await ctx.scene.enter("occasional-wizard");
+bot.hears(/cadastro|cadastrar/gim, AuthorizedUser, async (ctx) => {
+    await createRegister(ctx);
 });
 
-bot.command(/recurrent/gim, AuthorizedUser, async (ctx) => {
+bot.action("RECURRENT", async (ctx) => {
+    if (ctx.callbackQuery) await ctx.editMessageReplyMarkup();
     await ctx.scene.enter("recurrent-wizard");
+});
+
+bot.action("OCCASIONAL", async (ctx) => {
+    if (ctx.callbackQuery) await ctx.editMessageReplyMarkup();
+    await ctx.scene.enter("occasional-wizard");
 });
 
 bot.hears(/lembrete/gim, AuthorizedUser, async (ctx) => {
