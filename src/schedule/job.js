@@ -1,6 +1,7 @@
 const schedule = require("node-schedule");
 const reminders = require("../models/reminders");
 const replyOnGroup = require("../bot/handlers/replyOnGroup");
+const env = require("../config/env");
 
 async function teste() {
     const today = new Date().getDate();
@@ -15,7 +16,7 @@ async function teste() {
     return;
 }
 
-const rule = "0 8,12,13,14 * * *"; //everyday at 8, 12 and 14
+const rule = env.rule || "0 8,12,13,14 * * *"; //everyday at 8, 12, 13 and 14
 
 const job = schedule.scheduleJob(rule, teste);
 

@@ -7,4 +7,5 @@ module.exports = {
     users: process.env.USERS,
     chatId: process.env.CHATID,
     environment: process.env.ENVIRONMENT,
+    rule: process.env.RULE,
 };
