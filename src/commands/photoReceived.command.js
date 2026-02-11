@@ -1,6 +1,6 @@
 async function photoReceived(bot) {
     bot.on("photo", async (ctx) => {
-        ctx.replyWithHTML("foto recebida");
+        await ctx.scene.enter("file-wizard");
     });
 }
 
