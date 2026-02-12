@@ -1,25 +1,22 @@
 const { Scenes } = require("telegraf");
 const expense = require("../models/expense.model");
-const getFileInfo = require("../services/getFileInfo.service");
+const fileReceivedStep = require("../steps/fileReceived.step");
 
 const fileWizard = new Scenes.WizardScene(
     "file-wizard",
+
+    fileReceivedStep,
+
     async function (ctx) {
-        const fileData = ctx?.message?.photo?.at(-1);
-        const fileId = fileData?.file_id;
+        const type = ctx.callbackQuery?.data;
 
-        expense.file = await getFileInfo(fileId);
-
-        await ctx.replyWithHTML("registro recorrente ou ocasional?");
-        ctx.wizard.next();
-    },
-    async function (ctx) {
-        const choice = ctx?.message?.text?.trim();
-
-        if (choice.match(/recorrente/gim)) {
-            ctx.scene.enter("teste-wizard");
+        if (ctx.callbackQuery) {
+            await ctx.editMessageReplyMarkup();
+            expense.type = type;
         }
-        ctx.scene.leave();
+
+        if (type === "RECURRENT") ctx.scene.enter("teste-wizard");
+        if (type === "OCCASIONAL") ctx.scene.enter("teste-wizard");
     },
 );
 
