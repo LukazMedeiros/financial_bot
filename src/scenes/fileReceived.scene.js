@@ -16,7 +16,7 @@ const fileWizard = new Scenes.WizardScene(
         }
 
         if (type === "RECURRENT") ctx.scene.enter("recurrent-wizard");
-        if (type === "OCCASIONAL") ctx.scene.enter("teste-wizard");
+        if (type === "OCCASIONAL") ctx.scene.enter("occasional-wizard");
     },
 );
 
