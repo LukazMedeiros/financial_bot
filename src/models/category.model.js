@@ -6,18 +6,25 @@ class Category {
     topicId;
     active;
 
-    constructor(title, id) {
-        this.topicTitle = title;
-        this.topicId = parseInt(id);
-    }
-
-    //getter
+    //getters
     get topicTitle() {
         return this.topicTitle;
     }
 
     get topicId() {
         return this.topicId;
+    }
+
+    get table() {
+        return this.#table;
+    }
+
+    //setters
+    set topicTitle(value) {
+        this.topicTitle = value;
+    }
+    set topicId(value) {
+        this.topicId = parseInt(value);
     }
 
     //
