@@ -7,7 +7,7 @@ const keyboard = [
 ];
 
 async function fileReceivedStep(ctx) {
-    const fileData = ctx?.message?.photo?.at(-1);
+    const fileData = ctx?.message?.photo?.at(-1) || ctx?.message?.document;
     const fileId = fileData?.file_id;
 
     expense.file = await getFileInfo(fileId);

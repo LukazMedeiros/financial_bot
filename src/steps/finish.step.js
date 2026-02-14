@@ -29,10 +29,15 @@ function finishStep({ needValidation, validationFn, errorMessage }) {
         if (value === "YES") {
             try {
                 //adicionar funcionalidade para registrar em base de dados
-                const categoryId = await new Category().get(expense.category);
-                replyOnGroup(JSON.stringify(expense), categoryId);
+                const created = await expense.create();
+                if (created) {
+                    const categoryId = await new Category().get(
+                        expense.category,
+                    );
+                    replyOnGroup(JSON.stringify(expense), categoryId);
 
-                await ctx.replyWithHTML("Cadastrado com sucesso");
+                    await ctx.replyWithHTML("Cadastrado com sucesso");
+                }
             } catch (error) {
                 await ctx.replyWithHTML(`Erro para cadastrar ${error.message}`);
             }

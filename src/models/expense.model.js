@@ -1,4 +1,8 @@
+const dbConnection = require("../config/dbConnection");
+
 class Expense {
+    #table = "expense";
+
     file;
     description;
     amount;
@@ -56,7 +60,7 @@ class Expense {
     }
 
     set amount(value) {
-        this.amount = value;
+        this.amount = parseFloat(value).toFixed(2);
     }
 
     set paymentDate(value) {
@@ -94,6 +98,15 @@ class Expense {
         this.dueDateExceeded = undefined;
         this.user = undefined;
         this.type = undefined;
+    }
+
+    async create() {
+        try {
+            const result = await dbConnection(this.#table).insert(this);
+            return result > 0;
+        } catch (error) {
+            console.log(error.message); //substituir para funcionalidade de criação de logs
+        }
     }
 }
 

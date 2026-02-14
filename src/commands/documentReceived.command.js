@@ -1,6 +1,6 @@
 async function documentReceived(bot) {
     bot.on("document", async (ctx) => {
-        ctx.replyWithHTML("documento recebida");
+        await ctx.scene.enter("file-wizard");
     });
 }
 
