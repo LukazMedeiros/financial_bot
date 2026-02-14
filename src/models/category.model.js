@@ -2,17 +2,16 @@ const dbConnection = require("../config/dbConnection");
 
 class Category {
     #table = "categories";
-    topicTitle;
-    topicId;
-    active;
+    #topicTitle;
+    #topicId;
 
     //getters
     get topicTitle() {
-        return this.topicTitle;
+        return this.#topicTitle;
     }
 
     get topicId() {
-        return this.topicId;
+        return this.#topicId;
     }
 
     get table() {
@@ -21,17 +20,21 @@ class Category {
 
     //setters
     set topicTitle(value) {
-        this.topicTitle = value;
+        this.#topicTitle = value;
     }
     set topicId(value) {
-        this.topicId = parseInt(value);
+        this.#topicId = parseInt(value);
     }
 
     //
     async create() {
-        this.active = true;
+        const obj = {
+            topicTitle: this.#topicTitle,
+            topicId: this.#topicId,
+            active: true,
+        };
         try {
-            const result = await dbConnection(this.#table).insert(this);
+            const result = await dbConnection(this.table).insert(obj);
             return result > 0;
         } catch (error) {
             console.log(error.message); //substituir para funcionalidade de criação de logs
@@ -42,7 +45,7 @@ class Category {
         this.active = false;
 
         try {
-            const result = await dbConnection(this.#table)
+            const result = await dbConnection(this.table)
                 .update({
                     active: this.active,
                 })
@@ -55,7 +58,7 @@ class Category {
 
     async list() {
         try {
-            const result = await dbConnection(this.#table)
+            const result = await dbConnection(this.table)
                 .select("*")
                 .where({ active: true });
             return result;

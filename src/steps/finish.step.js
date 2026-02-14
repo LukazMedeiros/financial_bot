@@ -34,7 +34,7 @@ function finishStep({ needValidation, validationFn, errorMessage }) {
                     const categoryId = await new Category().get(
                         expense.category,
                     );
-                    replyOnGroup(JSON.stringify(expense), categoryId);
+                    replyOnGroup(JSON.stringify(created), categoryId);
 
                     await ctx.replyWithHTML("Cadastrado com sucesso");
                 }

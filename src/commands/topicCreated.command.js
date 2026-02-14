@@ -9,7 +9,9 @@ async function topicCreated(bot) {
         const updateMessage = ctx?.update?.message;
         const topicId = updateMessage?.message_thread_id;
         const topicTitle = updateMessage?.forum_topic_created?.name;
-        const category = new Category(topicTitle, topicId);
+        const category = new Category();
+        category.topicId = topicId;
+        category.topicTitle = topicTitle;
 
         const result = await category.create();
 
