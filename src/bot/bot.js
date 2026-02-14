@@ -4,6 +4,7 @@ const env = require("../config/env");
 //commands
 const photoReceived = require("../commands/photoReceived.command");
 const documentReceived = require("../commands/documentReceived.command");
+const topicCreated = require("../commands/topicCreated.command");
 
 //wizards
 const fileWizard = require("../scenes/fileReceived.scene");
@@ -22,6 +23,7 @@ bot.use(stages.middleware());
 
 photoReceived(bot);
 documentReceived(bot);
+topicCreated(bot);
 
 bot.launch();
 
