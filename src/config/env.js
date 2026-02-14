@@ -7,6 +7,7 @@ const env = {
     getFileInfo: process.env.GETFILEINFO,
     getFileUrl: process.env.GETFILEURL,
     environment: process.env.ENVIRONMENT,
+    chatId: process.env.CHATID,
 };
 
 module.exports = env;

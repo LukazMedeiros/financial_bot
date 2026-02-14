@@ -63,6 +63,17 @@ class Category {
             console.log(error.message); //substituir para funcionalidade de criação de logs
         }
     }
+
+    async get(id) {
+        try {
+            const { topicId } = await dbConnection(this.table)
+                .first("topicId")
+                .where({ id });
+            return topicId;
+        } catch (error) {
+            console.log(error.message); //substituir para funcionalidade de criação de logs
+        }
+    }
 }
 
 module.exports = Category;

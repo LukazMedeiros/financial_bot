@@ -1,4 +1,6 @@
+const Category = require("../models/category.model");
 const expense = require("../models/expense.model");
+const replyOnGroup = require("../services/replyOnGroup.service");
 
 function finishStep({ needValidation, validationFn, errorMessage }) {
     return async (ctx) => {
@@ -27,10 +29,10 @@ function finishStep({ needValidation, validationFn, errorMessage }) {
         if (value === "YES") {
             try {
                 //adicionar funcionalidade para registrar em base de dados
-                //adicionar funcionalidade para enviar para grupo
-                await ctx.replyWithHTML(
-                    `Cadastrado ${JSON.stringify(expense)}`,
-                );
+                const categoryId = await new Category().get(expense.category);
+                replyOnGroup(JSON.stringify(expense), categoryId);
+
+                await ctx.replyWithHTML("Cadastrado com sucesso");
             } catch (error) {
                 await ctx.replyWithHTML(`Erro para cadastrar ${error.message}`);
             }

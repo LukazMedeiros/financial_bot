@@ -5,6 +5,7 @@ const env = require("../config/env");
 const photoReceived = require("../commands/photoReceived.command");
 const documentReceived = require("../commands/documentReceived.command");
 const topicCreated = require("../commands/topicCreated.command");
+const start = require("../commands/start.command");
 
 //wizards
 const fileWizard = require("../scenes/fileReceived.scene");
@@ -21,6 +22,7 @@ const bot = new Telegraf(env.token);
 bot.use(session());
 bot.use(stages.middleware());
 
+start(bot);
 photoReceived(bot);
 documentReceived(bot);
 topicCreated(bot);
