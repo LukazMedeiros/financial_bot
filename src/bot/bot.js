@@ -7,9 +7,10 @@ const documentReceived = require("../commands/documentReceived.command");
 
 //wizards
 const fileWizard = require("../scenes/fileReceived.scene");
+const recurrentWizard = require("../scenes/recurrent.scene");
 const teste = require("../scenes/teste.scene");
 
-const stages = new Scenes.Stage([fileWizard, teste]);
+const stages = new Scenes.Stage([fileWizard, recurrentWizard, teste]);
 
 const bot = new Telegraf(env.token);
 bot.use(session());

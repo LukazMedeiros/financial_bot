@@ -15,7 +15,7 @@ const fileWizard = new Scenes.WizardScene(
             expense.type = type;
         }
 
-        if (type === "RECURRENT") ctx.scene.enter("teste-wizard");
+        if (type === "RECURRENT") ctx.scene.enter("recurrent-wizard");
         if (type === "OCCASIONAL") ctx.scene.enter("teste-wizard");
     },
 );
