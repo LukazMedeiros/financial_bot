@@ -14,7 +14,6 @@ async function getFileInfo(fileId) {
 
     const { config } = await axios.get(url);
 
-    // console.log(config);
     return config.url;
 }
 
