@@ -82,6 +82,19 @@ class Expense {
     set type(value) {
         this.type = value;
     }
+
+    //
+    clear() {
+        this.file = undefined;
+        this.description = undefined;
+        this.amount = undefined;
+        this.paymentDate = undefined;
+        this.dueDate = undefined;
+        this.category = undefined;
+        this.dueDateExceeded = undefined;
+        this.user = undefined;
+        this.type = undefined;
+    }
 }
 
 const expense = new Expense();

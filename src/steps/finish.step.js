@@ -37,7 +37,7 @@ function finishStep({ needValidation, validationFn, errorMessage }) {
         } else {
             await ctx.replyWithHTML("Cancelado");
         }
-
+        expense.clear();
         ctx.scene.leave();
     };
 }
