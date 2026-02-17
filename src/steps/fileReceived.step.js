@@ -11,8 +11,6 @@ async function fileReceivedStep(ctx) {
     const fileId = fileData?.file_id;
 
     expense.file = await getFileInfo(fileId);
-    // const file = await getFileInfo(fileId);
-    // expense.file = file;
 
     await ctx.replyWithHTML("Registro recorrente ou ocasional?", {
         reply_markup: {

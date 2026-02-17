@@ -64,24 +64,34 @@ class Expense {
     }
 
     set amount(value) {
+        value = value.replace(",", ".");
         this.#amount = parseFloat(value);
     }
 
     set paymentDate(value) {
-        value = value.split("/")?.reverse();
-        this.#paymentDate = new Date(value);
+        if (value.match(/hoje/gim)) {
+            this.#paymentDate = new Date();
+        } else {
+            value = value.split("/")?.reverse();
+            this.#paymentDate = new Date(value);
+        }
     }
 
     set dueDate(value) {
-        this.#dueDate = value;
-    }
-
-    set category(value) {
-        this.#category = value;
+        if (value.match(/hoje/gim)) {
+            this.#dueDate = new Date();
+        } else {
+            value = value.split("/")?.reverse();
+            this.#dueDate = new Date(value);
+        }
     }
 
     set dueDateExceeded(value) {
         this.#dueDateExceeded = value;
+    }
+
+    set category(value) {
+        this.#category = value;
     }
 
     set user(value) {
@@ -93,6 +103,9 @@ class Expense {
     }
 
     //
+    HasDueDateExceeded() {
+        this.dueDateExceeded = this.paymentDate > this.dueDate;
+    }
 
     clear() {
         this.#file = undefined;

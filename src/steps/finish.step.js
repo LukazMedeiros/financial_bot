@@ -21,14 +21,13 @@ function finishStep({ needValidation, validationFn, errorMessage }) {
         }
 
         if (expense.dueDate) {
-            //adicionar funcionalidade para verificar se esta vencida
+            expense.HasDueDateExceeded();
         }
 
         expense.user = user;
 
         if (value === "YES") {
             try {
-                //adicionar funcionalidade para registrar em base de dados
                 const created = await expense.create();
                 if (created) {
                     const categoryId = await new Category().get(
