@@ -28,9 +28,8 @@ function selectSomethingStep({
         }
 
         if (key) expense[key] = value;
-        ctx.wizard.state[key] = value;
 
-        await ctx.replyWithHTML(requests.confirmation(ctx.wizard.state), {
+        await ctx.replyWithHTML(requests.confirmation(expense), {
             reply_markup: {
                 inline_keyboard: keyboard,
             },

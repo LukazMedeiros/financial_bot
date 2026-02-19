@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 const requests = {
     selectType:
         "🔁 <b>Tipo de registro</b>\nEsse registro é uma despesa <b>recorrente</b> (todo mês) ou <b>ocasional</b> (compra única)?",
@@ -20,8 +22,8 @@ const requests = {
     confirmation: (data) => `📋 <b>Confira os dados:</b>
 📝 Descrição: ${data.description}
 💰 Valor: R$ ${parseFloat(data.amount).toFixed(2)}
-📅 Pagamento: ${data.paymentDate}
-${data.dueDate ? `📅 Vencimento: ${data.dueDate}` : ""}
+📅 Pagamento: ${moment(data.paymentDate).format("DD/MM/YYYY")}
+${data.dueDate ? `📅 Vencimento: ${moment(data.dueDate).format("DD/MM/YYYY")}` : ""}
 
 Está tudo certinho?`,
 
@@ -29,10 +31,12 @@ Está tudo certinho?`,
 
 📝 Descrição: <b>${data.description}</b>
 💰 Valor: R$ <b>${parseFloat(data.amount).toFixed(2)}</b>
-📅 Pagamento: <b>${data.paymentDate}</b>
+📅 Pagamento: <b>${moment(data.paymentDate).format("DD/MM/YYYY")}</b>
 👤 Pagador: <b>${data.user}</b>
-${data.dueDate ? `📅 Vencimento: <b>${data.dueDate}</b>` : ""}
+${data.dueDate ? `📅 Vencimento: <b>${moment(data.dueDate).format("DD/MM/YYYY")}</b>` : ""}
 ${data.file ? `💾 Comprovante: <a href='${data.file}'>Clique para baixar</a>` : ""}`,
 };
+
+moment;
 
 module.exports = requests;
