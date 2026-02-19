@@ -5,7 +5,7 @@ const env = require("../config/env");
 const photoReceived = require("../commands/photoReceived.command");
 const documentReceived = require("../commands/documentReceived.command");
 const topicCreated = require("../commands/topicCreated.command");
-const topicClosed = require("../commands/topicClosed");
+const topicClosed = require("../commands/topicClosed.command");
 const start = require("../commands/start.command");
 
 //wizards

@@ -31,8 +31,8 @@ Está tudo certinho?`,
 
 📝 Descrição: <b>${data.description}</b>
 💰 Valor: R$ <b>${parseFloat(data.amount).toFixed(2)}</b>
-📅 Pagamento: <b>${moment(data.paymentDate).format("DD/MM/YYYY")}</b>
 👤 Pagador: <b>${data.user}</b>
+📅 Pagamento: <b>${moment(data.paymentDate).format("DD/MM/YYYY")}</b>
 ${data.dueDate ? `📅 Vencimento: <b>${moment(data.dueDate).format("DD/MM/YYYY")}</b>` : ""}
 ${data.file ? `💾 Comprovante: <a href='${data.file}'>Clique para baixar</a>` : ""}`,
 };
