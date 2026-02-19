@@ -1,6 +1,7 @@
 const Category = require("../models/category.model");
 const expense = require("../models/expense.model");
 const replyOnGroup = require("../services/replyOnGroup.service");
+const requests = require("../messages/requests.message");
 
 function finishStep({ needValidation, validationFn, errorMessage }) {
     return async (ctx) => {
@@ -33,7 +34,8 @@ function finishStep({ needValidation, validationFn, errorMessage }) {
                     const categoryId = await new Category().get(
                         expense.category,
                     );
-                    replyOnGroup(JSON.stringify(created), categoryId);
+
+                    replyOnGroup(requests.replyMessage(created), categoryId);
 
                     await ctx.replyWithHTML("Cadastrado com sucesso");
                 }

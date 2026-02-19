@@ -23,6 +23,7 @@ function askSomethingStep({
         }
 
         if (key) expense[key] = value;
+        ctx.wizard.state[key] = value;
 
         await ctx.replyWithHTML(message);
 

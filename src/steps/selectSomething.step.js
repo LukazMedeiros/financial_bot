@@ -1,6 +1,5 @@
+const requests = require("../messages/requests.message");
 const expense = require("../models/expense.model");
-
-//alterar para o keyboard vir como argumento
 
 const keyboard = [
     [{ text: "Sim", callback_data: "YES" }],
@@ -9,11 +8,9 @@ const keyboard = [
 
 function selectSomethingStep({
     key,
-    message,
     needValidation,
     validationFn,
     errorMessage,
-    // keyboard,
 }) {
     return async (ctx) => {
         const receivedText = ctx?.message?.text?.trim();
@@ -31,8 +28,9 @@ function selectSomethingStep({
         }
 
         if (key) expense[key] = value;
+        ctx.wizard.state[key] = value;
 
-        await ctx.replyWithHTML(message, {
+        await ctx.replyWithHTML(requests.confirmation(ctx.wizard.state), {
             reply_markup: {
                 inline_keyboard: keyboard,
             },
