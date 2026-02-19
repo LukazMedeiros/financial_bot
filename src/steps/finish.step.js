@@ -2,6 +2,8 @@ const Category = require("../models/category.model");
 const expense = require("../models/expense.model");
 const replyOnGroup = require("../services/replyOnGroup.service");
 const requests = require("../messages/requests.message");
+const status = require("../messages/status.message");
+const error = require("../messages/error.message");
 
 function finishStep({ needValidation, validationFn, errorMessage }) {
     return async (ctx) => {
@@ -37,13 +39,13 @@ function finishStep({ needValidation, validationFn, errorMessage }) {
 
                     replyOnGroup(requests.replyMessage(created), categoryId);
 
-                    await ctx.replyWithHTML("Cadastrado com sucesso");
+                    await ctx.replyWithHTML(status.success);
                 }
-            } catch (error) {
-                await ctx.replyWithHTML(`Erro para cadastrar ${error.message}`);
+            } catch (e) {
+                await ctx.replyWithHTML(error.error + e.message);
             }
         } else {
-            await ctx.replyWithHTML("Cancelado");
+            await ctx.replyWithHTML(status.cancel);
         }
         expense.clear();
         ctx.scene.leave();

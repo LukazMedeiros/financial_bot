@@ -2,8 +2,8 @@ const requests = require("../messages/requests.message");
 const expense = require("../models/expense.model");
 
 const keyboard = [
-    [{ text: "Sim", callback_data: "YES" }],
-    [{ text: "Não", callback_data: "NO" }],
+    [{ text: "Sim, salvar", callback_data: "YES" }],
+    [{ text: "Não, cancelar", callback_data: "NO" }],
 ];
 
 function selectSomethingStep({
