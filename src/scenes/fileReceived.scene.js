@@ -13,6 +13,7 @@ const fileWizard = new Scenes.WizardScene(
         if (ctx.callbackQuery) {
             await ctx.editMessageReplyMarkup();
             expense.type = type;
+            ctx.wizard.state.type = type;
         }
 
         if (type === "RECURRENT") ctx.scene.enter("recurrent-wizard");

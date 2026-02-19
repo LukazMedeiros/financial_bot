@@ -1,3 +1,4 @@
+const requests = require("../messages/requests.message");
 const expense = require("../models/expense.model");
 const getFileInfo = require("../services/getFileInfo.service");
 
@@ -12,7 +13,7 @@ async function fileReceivedStep(ctx) {
 
     expense.file = await getFileInfo(fileId);
 
-    await ctx.replyWithHTML("Registro recorrente ou ocasional?", {
+    await ctx.replyWithHTML(requests.selectType, {
         reply_markup: {
             inline_keyboard: keyboard,
         },

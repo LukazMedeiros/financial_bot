@@ -3,8 +3,10 @@ const askSomethingStep = require("../steps/askSomething.step");
 const askCategoriesStep = require("../steps/askCategories.step");
 const finishStep = require("../steps/finish.step");
 const selectSomethingStep = require("../steps/selectSomething.step");
-const isMonetaryValue = require("../utils/isMonetaryValue");
-const isDateValid = require("../utils/isValidDate");
+const isMonetaryValue = require("../utils/isMonetaryValue.util");
+const isDateValid = require("../utils/isValidDate.util");
+const requests = require("../messages/requests.message");
+const expense = require("../models/expense.model");
 
 const recurrentWizard = new Scenes.WizardScene(
     "recurrent-wizard",
@@ -13,7 +15,7 @@ const recurrentWizard = new Scenes.WizardScene(
 
     askSomethingStep({
         key: "category",
-        message: "Entre com a descrição",
+        message: requests.insertDescription,
         needValidation: false,
         validationFn: null,
         errorMessage: "Selecione uma categoria válida!",
@@ -21,7 +23,7 @@ const recurrentWizard = new Scenes.WizardScene(
 
     askSomethingStep({
         key: "description",
-        message: "Entre com o valor",
+        message: requests.insertAmount,
         needValidation: false,
         validationFn: null,
         errorMessage: "A descrição não pode ser vazia",
@@ -29,7 +31,7 @@ const recurrentWizard = new Scenes.WizardScene(
 
     askSomethingStep({
         key: "amount",
-        message: "Entre com a data do pagamento",
+        message: requests.insertPaymentDate,
         needValidation: true,
         validationFn: isMonetaryValue,
         errorMessage: "Entre com um valor monetário valido! ex: 10,50",
@@ -37,7 +39,7 @@ const recurrentWizard = new Scenes.WizardScene(
 
     askSomethingStep({
         key: "paymentDate",
-        message: "Entre com a data do vencimento",
+        message: requests.insertDueDate,
         needValidation: true,
         validationFn: isDateValid,
         errorMessage: "Entre com uma data válida! ex: 01/01/2026",
@@ -45,7 +47,6 @@ const recurrentWizard = new Scenes.WizardScene(
 
     selectSomethingStep({
         key: "dueDate",
-        message: "Os dados estão corretos?", //adicionar formação com os valores inseridos pelo usuário
         needValidation: true,
         validationFn: isDateValid,
         errorMessage: "Entre com uma data válida! ex: 01/01/2026",

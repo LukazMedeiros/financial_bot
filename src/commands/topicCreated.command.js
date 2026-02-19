@@ -5,7 +5,7 @@ const env = require("../config/env");
 const agent = new Telegraf(env.token);
 
 async function topicCreated(bot) {
-    bot.on("forum_topic_created", async (ctx, bot) => {
+    bot.on("forum_topic_created", async (ctx) => {
         const updateMessage = ctx?.update?.message;
         const topicId = updateMessage?.message_thread_id;
         const topicTitle = updateMessage?.forum_topic_created?.name;
