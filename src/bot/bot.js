@@ -5,6 +5,7 @@ const env = require("../config/env");
 const photoReceived = require("../commands/photoReceived.command");
 const documentReceived = require("../commands/documentReceived.command");
 const topicCreated = require("../commands/topicCreated.command");
+const topicClosed = require("../commands/topicClosed");
 const start = require("../commands/start.command");
 
 //wizards
@@ -26,6 +27,7 @@ start(bot);
 photoReceived(bot);
 documentReceived(bot);
 topicCreated(bot);
+topicClosed(bot);
 
 bot.launch();
 

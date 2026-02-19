@@ -3,7 +3,7 @@ const askCategoriesStep = require("../steps/askCategories.step");
 const askSomethingStep = require("../steps/askSomething.step");
 const selectSomethingStep = require("../steps/selectSomething.step");
 const finishStep = require("../steps/finish.step");
-const isMonetaryValue = require("../utils/isMontetaryValue");
+const isMonetaryValue = require("../utils/isMonetaryValue");
 const isDateValid = require("../utils/isValidDate");
 
 const occasionalWizard = new Scenes.WizardScene(
