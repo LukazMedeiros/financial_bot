@@ -6,7 +6,7 @@ const selectSomethingStep = require("../steps/selectSomething.step");
 const isMonetaryValue = require("../utils/isMonetaryValue.util");
 const isDateValid = require("../utils/isValidDate.util");
 const requests = require("../messages/requests.message");
-const expense = require("../models/expense.model");
+const error = require("../messages/error.message");
 
 const recurrentWizard = new Scenes.WizardScene(
     "recurrent-wizard",
@@ -18,7 +18,7 @@ const recurrentWizard = new Scenes.WizardScene(
         message: requests.insertDescription,
         needValidation: false,
         validationFn: null,
-        errorMessage: "Selecione uma categoria válida!",
+        errorMessage: error.category,
     }),
 
     askSomethingStep({
@@ -26,7 +26,7 @@ const recurrentWizard = new Scenes.WizardScene(
         message: requests.insertAmount,
         needValidation: false,
         validationFn: null,
-        errorMessage: "A descrição não pode ser vazia",
+        errorMessage: error.description,
     }),
 
     askSomethingStep({
@@ -34,7 +34,7 @@ const recurrentWizard = new Scenes.WizardScene(
         message: requests.insertPaymentDate,
         needValidation: true,
         validationFn: isMonetaryValue,
-        errorMessage: "Entre com um valor monetário valido! ex: 10,50",
+        errorMessage: error.amount,
     }),
 
     askSomethingStep({
@@ -42,14 +42,14 @@ const recurrentWizard = new Scenes.WizardScene(
         message: requests.insertDueDate,
         needValidation: true,
         validationFn: isDateValid,
-        errorMessage: "Entre com uma data válida! ex: 01/01/2026",
+        errorMessage: error.date,
     }),
 
     selectSomethingStep({
         key: "dueDate",
         needValidation: true,
         validationFn: isDateValid,
-        errorMessage: "Entre com uma data válida! ex: 01/01/2026",
+        errorMessage: error.date,
     }),
 
     finishStep({}),
