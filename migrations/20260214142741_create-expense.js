@@ -19,6 +19,7 @@ exports.up = function (knex) {
         table.boolean("dueDateExceeded");
         table.string("user").notNullable();
         table.string("type").notNullable();
+        table.timestamps(true, true);
     });
 };
 

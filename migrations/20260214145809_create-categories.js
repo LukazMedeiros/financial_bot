@@ -13,6 +13,7 @@ exports.up = function (knex) {
         table.string("topicTitle").notNullable();
         table.integer("topicId").notNullable();
         table.string("active").notNullable();
+        table.timestamps(true, true);
     });
 };
 

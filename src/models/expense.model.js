@@ -126,8 +126,8 @@ class Expense {
             amount: this.amount,
             paymentDate: this.paymentDate,
             category: this.category,
-            dueDate: this.dueDate || null,
-            dueDateExceeded: this.dueDateExceeded || null,
+            dueDate: this.dueDate ?? null,
+            dueDateExceeded: this.dueDateExceeded ?? null,
             user: this.user,
             type: this.type,
         };

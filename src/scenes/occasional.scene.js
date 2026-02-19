@@ -3,6 +3,8 @@ const askCategoriesStep = require("../steps/askCategories.step");
 const askSomethingStep = require("../steps/askSomething.step");
 const selectSomethingStep = require("../steps/selectSomething.step");
 const finishStep = require("../steps/finish.step");
+const isMonetaryValue = require("../utils/isMontetaryValue");
+const isDateValid = require("../utils/isValidDate");
 
 const occasionalWizard = new Scenes.WizardScene(
     "occasional-wizard",
@@ -20,8 +22,8 @@ const occasionalWizard = new Scenes.WizardScene(
     askSomethingStep({
         key: "description",
         message: "Entre com o valor",
-        needValidation: true,
-        validationFn: (value) => value === (null || undefined || ""),
+        needValidation: false,
+        validationFn: null,
         errorMessage: "A descrição não pode ser vazia",
     }),
 
@@ -29,15 +31,15 @@ const occasionalWizard = new Scenes.WizardScene(
         key: "amount",
         message: "Entre com a data do pagamento",
         needValidation: true,
-        validationFn: (value) => !value.match(/^(\d{1,})([.|,])?(\d{0,2})?$/),
+        validationFn: isMonetaryValue,
         errorMessage: "Entre com um valor monetário valido! ex: 10,50",
     }),
 
     selectSomethingStep({
         key: "paymentDate",
         message: "Os dados estão corretos?", //adicionar formação com os valores inseridos pelo usuário
-        needValidation: false, //alterar para true
-        validationFn: null, //alterar para validador de datas
+        needValidation: true,
+        validationFn: isDateValid,
         errorMessage: "Entre com uma data válida! ex: 01/01/2026",
     }),
 
