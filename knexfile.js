@@ -1,5 +1,7 @@
 // Update with your config settings.
 
+const env = require("./src/config/env");
+
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
@@ -17,11 +19,15 @@ module.exports = {
     },
 
     staging: {
-        client: "postgresql",
+        client: "pg",
         connection: {
-            database: "my_db",
-            user: "username",
-            password: "password",
+            connectionString: env.databaseUrl,
+            database: env.database,
+            user: env.dbUser,
+            password: env.dbPassword,
+            port: env.dbPort,
+            host: env.dbHost,
+            ssl: false,
         },
         pool: {
             min: 2,
@@ -33,11 +39,15 @@ module.exports = {
     },
 
     production: {
-        client: "postgresql",
+        client: "pg",
         connection: {
-            database: "my_db",
-            user: "username",
-            password: "password",
+            connectionString: env.databaseUrl,
+            database: env.database,
+            user: env.dbUser,
+            password: env.dbPassword,
+            port: env.dbPort,
+            host: env.dbHost,
+            ssl: false,
         },
         pool: {
             min: 2,

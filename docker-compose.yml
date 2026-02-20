@@ -1,0 +1,43 @@
+services:
+  postgresdb:
+    image: postgres:16-alpine
+    restart: on-failure
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=$DBUSER
+      - POSTGRES_PASSWORD=$DBPASSWORD
+      - POSTGRES_DB=$DATABASE
+    ports:
+      - $DBPORT:$DBPORT
+    volumes:
+      - db:/var/lib/postgres
+    networks:
+      - node-postgres
+  app:
+    depends_on:
+      - postgresdb
+    build: .
+    restart: on-failure
+    env_file: ./.env
+    environment:
+      - GETFILEINFO=$GETFILEINFO
+      - GETFILEURL=$GETFILEURL
+      - TOKEN=$TOKEN
+      - CHATID=$CHATID
+      - ENVIRONMENT=$ENVIRONMENT
+      - DATABASE=$DATABASE
+      - DBUSER=$DBUSER
+      - DBPASSWORD=$DBPASSWORD
+      - DBPORT=$DBPORT
+      - DBHOST=$DBHOST
+      - DATABASEURL=$DATABASEURL
+    stdin_open: true
+    tty: true
+    networks:
+      - node-postgres
+
+networks:
+  node-postgres:
+
+volumes: 
+  db:
