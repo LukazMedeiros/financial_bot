@@ -13,6 +13,9 @@ Vou te guiar passo a passo para salvar as informações corretamente 😉`,
 📅 Dia: ${data.day}
 
 está certinho? 🤔`,
+
+    requestPayment: (data) =>
+        `🚨 Você tem um lembrete para hoje!\nNão va esquecer de pagar <b>${data.description}</b> 😉`,
 };
 
 module.exports = reminders;

@@ -8,6 +8,7 @@ const env = {
     getFileUrl: process.env.GETFILEURL,
     environment: process.env.ENVIRONMENT,
     chatId: process.env.CHATID,
+    rule: process.env.RULE,
 };
 
 module.exports = env;
