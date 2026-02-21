@@ -41,6 +41,4 @@ ${data.dueDate ? `📅 Vencimento: <b>${moment(data.dueDate).format("DD/MM/YYYY"
 ${data.file ? `💾 Comprovante: <a href='${data.file}'>Clique para baixar</a>` : ""}`,
 };
 
-moment;
-
 module.exports = requests;

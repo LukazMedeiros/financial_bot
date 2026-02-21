@@ -9,6 +9,7 @@ const env = {
     environment: process.env.ENVIRONMENT,
     chatId: process.env.CHATID,
     rule: process.env.RULE,
+    users: process.env.USERS,
 };
 
 module.exports = env;

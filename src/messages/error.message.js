@@ -10,6 +10,12 @@ const error = {
     date: "📅 Data inválida. Use o formato dia/mês/ano. Ex: 01/01/2026",
 
     error: "😅 Tivemos um probleminha técnico ao salvar esses dados. Por favor, tente novamente em instantes.",
+
+    unauthorized: `🚫 Acesso não autorizado
+
+Desculpe, mas você não tem permissão para utilizar este bot.
+
+Se você acredita que isso é um erro, entre em contato com o administrador para solicitar acesso.`,
 };
 
 module.exports = error;
