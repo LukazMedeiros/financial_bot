@@ -16,10 +16,6 @@ Para começar, escolha uma opção:
 Você também pode iniciar me encaminhando o comprovante para registrar uma nova despesa 😎
 
 Vamos manter suas finanças em dia? 🚀`,
-
-    start: `📝 Vamos criar um novo registro!
-
-Vou te guiar passo a passo para salvar as informações corretamente 😉`,
 };
 
 module.exports = greetings;

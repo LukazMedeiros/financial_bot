@@ -5,7 +5,7 @@ const requests = require("../messages/requests.message");
 const status = require("../messages/status.message");
 const error = require("../messages/error.message");
 
-function finishStep({ needValidation, validationFn, errorMessage }) {
+function finishExpenseStep({ needValidation, validationFn, errorMessage }) {
     return async (ctx) => {
         const context = ctx?.message?.from ?? ctx?.callbackQuery;
         const user = context.from?.username;
@@ -52,4 +52,4 @@ function finishStep({ needValidation, validationFn, errorMessage }) {
     };
 }
 
-module.exports = finishStep;
+module.exports = finishExpenseStep;

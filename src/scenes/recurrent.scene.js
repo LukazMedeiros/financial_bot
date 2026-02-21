@@ -1,12 +1,13 @@
 const { Scenes } = require("telegraf");
 const askSomethingStep = require("../steps/askSomething.step");
 const askCategoriesStep = require("../steps/askCategories.step");
-const finishStep = require("../steps/finish.step");
+const finishExpenseStep = require("../steps/finishExpense.step");
 const selectSomethingStep = require("../steps/selectSomething.step");
 const isMonetaryValue = require("../utils/isMonetaryValue.util");
 const isDateValid = require("../utils/isValidDate.util");
 const requests = require("../messages/requests.message");
 const error = require("../messages/error.message");
+const expense = require("../models/expense.model");
 
 const recurrentWizard = new Scenes.WizardScene(
     "recurrent-wizard",
@@ -19,6 +20,7 @@ const recurrentWizard = new Scenes.WizardScene(
         needValidation: false,
         validationFn: null,
         errorMessage: error.category,
+        model: expense,
     }),
 
     askSomethingStep({
@@ -27,6 +29,7 @@ const recurrentWizard = new Scenes.WizardScene(
         needValidation: false,
         validationFn: null,
         errorMessage: error.description,
+        model: expense,
     }),
 
     askSomethingStep({
@@ -35,6 +38,7 @@ const recurrentWizard = new Scenes.WizardScene(
         needValidation: true,
         validationFn: isMonetaryValue,
         errorMessage: error.amount,
+        model: expense,
     }),
 
     askSomethingStep({
@@ -43,6 +47,7 @@ const recurrentWizard = new Scenes.WizardScene(
         needValidation: true,
         validationFn: isDateValid,
         errorMessage: error.date,
+        model: expense,
     }),
 
     selectSomethingStep({
@@ -50,9 +55,11 @@ const recurrentWizard = new Scenes.WizardScene(
         needValidation: true,
         validationFn: isDateValid,
         errorMessage: error.date,
+        message: requests.confirmation,
+        model: expense,
     }),
 
-    finishStep({}),
+    finishExpenseStep({}),
 );
 
 module.exports = recurrentWizard;

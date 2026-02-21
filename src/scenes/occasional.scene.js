@@ -2,11 +2,12 @@ const { Scenes } = require("telegraf");
 const askCategoriesStep = require("../steps/askCategories.step");
 const askSomethingStep = require("../steps/askSomething.step");
 const selectSomethingStep = require("../steps/selectSomething.step");
-const finishStep = require("../steps/finish.step");
+const finishExpenseStep = require("../steps/finishExpense.step");
 const isMonetaryValue = require("../utils/isMonetaryValue.util");
 const isDateValid = require("../utils/isValidDate.util");
 const requests = require("../messages/requests.message");
 const error = require("../messages/error.message");
+const expense = require("../models/expense.model");
 
 const occasionalWizard = new Scenes.WizardScene(
     "occasional-wizard",
@@ -19,6 +20,7 @@ const occasionalWizard = new Scenes.WizardScene(
         needValidation: false,
         validationFn: null,
         errorMessage: error.category,
+        model: expense,
     }),
 
     askSomethingStep({
@@ -27,6 +29,7 @@ const occasionalWizard = new Scenes.WizardScene(
         needValidation: false,
         validationFn: null,
         errorMessage: error.description,
+        model: expense,
     }),
 
     askSomethingStep({
@@ -35,6 +38,7 @@ const occasionalWizard = new Scenes.WizardScene(
         needValidation: true,
         validationFn: isMonetaryValue,
         errorMessage: error.amount,
+        model: expense,
     }),
 
     selectSomethingStep({
@@ -42,9 +46,11 @@ const occasionalWizard = new Scenes.WizardScene(
         needValidation: true,
         validationFn: isDateValid,
         errorMessage: error.date,
+        message: requests.confirmation,
+        model: expense,
     }),
 
-    finishStep({}),
+    finishExpenseStep({}),
 );
 
 module.exports = occasionalWizard;
