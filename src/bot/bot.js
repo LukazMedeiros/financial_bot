@@ -8,18 +8,21 @@ const documentReceived = require("../commands/documentReceived.command");
 const topicCreated = require("../commands/topicCreated.command");
 const topicClosed = require("../commands/topicClosed.command");
 const newExpense = require("../commands/newExpense.command");
+const createReminder = require("../commands/createReminder.command");
 
 //wizards
 const fileWizard = require("../scenes/fileReceived.scene");
 const recurrentWizard = require("../scenes/recurrent.scene");
 const occasionalWizard = require("../scenes/occasional.scene");
 const newWizard = require("../scenes/newExpense.scene");
+const reminderWizard = require("../scenes/reminder.scene");
 
 const stages = new Scenes.Stage([
     fileWizard,
     recurrentWizard,
     occasionalWizard,
     newWizard,
+    reminderWizard,
 ]);
 
 const bot = new Telegraf(env.token);
@@ -32,6 +35,7 @@ documentReceived(bot);
 topicCreated(bot);
 topicClosed(bot);
 newExpense(bot);
+createReminder(bot);
 
 bot.launch();
 
