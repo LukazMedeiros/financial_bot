@@ -1,11 +1,10 @@
-const expense = require("../models/expense.model");
-
 function askSomethingStep({
     key,
     message,
     needValidation,
     validationFn,
     errorMessage,
+    model,
 }) {
     return async (ctx) => {
         const receivedText = ctx?.message?.text?.trim();
@@ -22,7 +21,7 @@ function askSomethingStep({
             }
         }
 
-        if (key) expense[key] = value;
+        if (key) model[key] = value;
 
         await ctx.replyWithHTML(message);
 

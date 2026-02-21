@@ -1,6 +1,3 @@
-const requests = require("../messages/requests.message");
-const expense = require("../models/expense.model");
-
 const keyboard = [
     [{ text: "Sim, salvar", callback_data: "YES" }],
     [{ text: "Não, cancelar", callback_data: "NO" }],
@@ -11,6 +8,8 @@ function selectSomethingStep({
     needValidation,
     validationFn,
     errorMessage,
+    message,
+    model,
 }) {
     return async (ctx) => {
         const receivedText = ctx?.message?.text?.trim();
@@ -27,9 +26,9 @@ function selectSomethingStep({
             }
         }
 
-        if (key) expense[key] = value;
+        if (key) model[key] = value;
 
-        await ctx.replyWithHTML(requests.confirmation(expense), {
+        await ctx.replyWithHTML(message(model), {
             reply_markup: {
                 inline_keyboard: keyboard,
             },

@@ -108,20 +108,20 @@ class Expense {
     }
 
     clear() {
-        this.#file = undefined;
-        this.#description = undefined;
-        this.#amount = undefined;
-        this.#paymentDate = undefined;
-        this.#dueDate = undefined;
-        this.#category = undefined;
-        this.#dueDateExceeded = undefined;
-        this.#user = undefined;
-        this.#type = undefined;
+        this.#file = null;
+        this.#description = null;
+        this.#amount = null;
+        this.#paymentDate = null;
+        this.#dueDate = null;
+        this.#category = null;
+        this.#dueDateExceeded = null;
+        this.#user = null;
+        this.#type = null;
     }
 
     async create() {
         const obj = {
-            file: this.file,
+            file: this.file ?? null,
             description: this.description,
             amount: this.amount,
             paymentDate: this.paymentDate,

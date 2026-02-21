@@ -1,6 +1,10 @@
 const moment = require("moment");
 
 const requests = {
+    start: `📝 Vamos criar um novo registro!
+
+Vou te guiar passo a passo para salvar as informações corretamente 😉`,
+
     selectType:
         "🔁 <b>Tipo de registro</b>\nEsse registro é uma despesa <b>recorrente</b> (todo mês) ou <b>ocasional</b> (compra única)?",
 

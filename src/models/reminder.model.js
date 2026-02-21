@@ -23,6 +23,11 @@ class Reminder {
         this.#description = value;
     }
 
+    async clear() {
+        this.#day = null;
+        this.#description = null;
+    }
+
     async create() {
         const obj = {
             description: this.#description,
@@ -50,4 +55,6 @@ class Reminder {
     }
 }
 
-module.exports = Reminder;
+const reminder = new Reminder();
+
+module.exports = reminder;
