@@ -9,6 +9,7 @@ const topicCreated = require("../commands/topicCreated.command");
 const topicClosed = require("../commands/topicClosed.command");
 const newExpense = require("../commands/newExpense.command");
 const createReminder = require("../commands/createReminder.command");
+const getPaidExpensesForCurrentMonth = require("../commands/getPaidExpensesForCurrentMonth.command");
 
 //wizards
 const fileWizard = require("../scenes/fileReceived.scene");
@@ -36,6 +37,7 @@ topicCreated(bot);
 topicClosed(bot);
 newExpense(bot);
 createReminder(bot);
+getPaidExpensesForCurrentMonth(bot);
 
 bot.launch();
 

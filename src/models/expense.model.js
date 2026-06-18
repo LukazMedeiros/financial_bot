@@ -138,6 +138,19 @@ class Expense {
             console.log(error.message); //substituir para funcionalidade de criação de logs
         }
     }
+
+    async getPaidExpenses() {
+        try {
+            const result = await dbConnection(this.table)
+                .select("*")
+                .whereRaw(
+                    "strftime('%Y-%m', created_at) = strftime('%Y-%m', 'now')",
+                );
+            return result;
+        } catch (error) {
+            console.log(error.message); //substituir para funcionalidade de criação de logs
+        }
+    }
 }
 
 const expense = new Expense();
