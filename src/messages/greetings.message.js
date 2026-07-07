@@ -12,6 +12,7 @@ Comigo, você mantém suas contas organizadas e evita atrasos.
 Para começar, escolha uma opção:
 /novo para registrar um gasto
 /lembrete para criar um lembrete de pagamento
+/pago para listar tudo o que foi pago no mês atual
 
 Você também pode iniciar me encaminhando o comprovante para registrar uma nova despesa 😎
 
