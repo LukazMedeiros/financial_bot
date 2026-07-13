@@ -18,11 +18,16 @@ function formatItem(itemObj) {
     return `${itemObj.description}\nR$ ${Number(itemObj.amount).toFixed(2)}\nData do pagamento: ${paymentDate}\n${dueDateExceeded}`;
 }
 
-async function getPaidExpenses() {
+async function getPaidExpensesMessage() {
     const expenses = await expense.getPaidExpenses();
     const messageFormatted = formatPaidExpenses(expenses);
 
     return messageFormatted;
 }
 
-module.exports = getPaidExpenses;
+async function getPaidExpensesObject() {
+    const expenses = await expense.getPaidExpenses();
+    return expenses;
+}
+
+module.exports = { getPaidExpensesMessage, getPaidExpensesObject };

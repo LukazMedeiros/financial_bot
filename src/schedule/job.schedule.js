@@ -4,7 +4,9 @@ const reminder = require("../models/reminder.model");
 const replyOnGroup = require("../services/replyOnGroup.service");
 const reminders = require("../messages/reminders.message");
 //
-const getPaidExpenses = require("../services/getPaidExpenses.service.js");
+const {
+    getPaidExpensesObject,
+} = require("../services/getPaidExpenses.service.js");
 
 const rule = env.rule;
 
@@ -13,7 +15,7 @@ const scheduledJobs = schedule.scheduleJob(rule, async () => {
 
     const [reminderResponse, expensesResponse] = await Promise.allSettled([
         reminder.get(today),
-        getPaidExpenses(),
+        getPaidExpensesObject(),
     ]);
 
     const hasReminderForToday = reminderResponse.value.length > 0;
